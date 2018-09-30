@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col s12 m7">
+    <div class="card">
+      <div class="card-image">
+        {{#if people}}
+          <img src="./assets/images/greedo.jpg">
+        {{else}}
+          <img src="./assets/images/starship.jpg">
+        {{/if}}
+        <span class="card-title">Card Title</span>
+      </div>
+      <div class="card-content">
+        {{#each people as |person|}}
+          {{person.name}}
+        {{/each}}
+        <p>{{name}} is a {{homeworld.name}}an native and rides a {{vehicle.name}}. He's starred in numerous movies, including
+          {{#each films as |film|}}
+            {{film.name}}
+          {{/each}}
+        </p>
+      </div>
+      <div class="card-action">
+        <a href="#">This is a link</a>
+      </div>
+    </div>
+  </div>
+</div>
