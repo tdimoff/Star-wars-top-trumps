@@ -7,7 +7,7 @@ export default Route.extend({
 
   setupController(controller, model) {
     controller.setProperties({
-      people: model
+      people: model,
       // name: model.get('name'),
       // homeworld: model.get('homeworld'),
       // films: model.get('films'),

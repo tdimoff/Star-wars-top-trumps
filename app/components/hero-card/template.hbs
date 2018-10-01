@@ -7,14 +7,11 @@
         {{else}}
           <img src="./assets/images/starship.jpg">
         {{/if}}
-        <span class="card-title">Card Title</span>
+        <span class="card-title">{{name}}</span>
       </div>
       <div class="card-content">
-        {{#each people as |person|}}
-          {{person.name}}
-        {{/each}}
         <p>{{name}} is a {{homeworld.name}}an native and rides a {{vehicle.name}}. He's starred in numerous movies, including
-          {{#each films as |film|}}
+          {{#each people.films as |film|}}
             {{film.name}}
           {{/each}}
         </p>

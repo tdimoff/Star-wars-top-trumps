@@ -1,37 +1,45 @@
 import DS from 'ember-data';
-import { isArray, A } from '@ember/array';
+import { underscore } from '@ember/string';
+import { isArray } from '@ember/array';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, primaryModelClass, payload) {
+  normalizeResponse(store, primaryModelClass, payload, id, requestType) {
     const transformedPayload = { data: [] };
 
     payload.results.forEach((obj) => {
-      const links = {};
+      const relationships = {};
       const id = parseInt(obj.url.match(/\d+/));
 
       for (let prop in obj) {
-        if (isArray(prop)) {
-          links.push(prop);
-          delete obj.prop;
+        if (obj.hasOwnProperty(prop)) {
+          if (isArray(obj[prop])) {
+            relationships[prop] = {data: []};
+            obj[prop].forEach((rel) => {
+              relationships[prop].data.push({
+                id: parseInt(rel.match(/\d+/)),
+                type: prop
+              });
+            });
+
+            delete obj[prop]
+          }
         }
       }
 
-      let transformedObj = {
-        type: 'person',
+      const jsonApi = {
         id: id,
+        type: primaryModelClass.modelName,
         attributes: obj,
-        relationships: {
-          person: {
-            links: {
-              related: links
-            }
-          }
-        }
+        relationships: relationships
       };
 
-      transformedPayload.data.push(transformedObj)
+      transformedPayload.data.push(jsonApi)
     });
 
-    return transformedPayload;
+    return this._super(store, primaryModelClass, transformedPayload, id, requestType);
+  },
+
+  keyForAttribute(attr) {
+    return underscore(attr);
   }
 });
