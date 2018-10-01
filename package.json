@@ -30,6 +30,7 @@
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
     "ember-cli-inject-live-reload": "^1.8.2",
+    "ember-cli-mirage": "^0.4.9",
     "ember-cli-qunit": "^4.3.2",
     "ember-cli-sass": "^8.0.1",
     "ember-cli-sri": "^2.1.1",
@@ -45,8 +46,8 @@
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
     "materialize-css": "^1.0.0",
-    "qunit-dom": "^0.7.1",
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.9.3",
+    "qunit-dom": "^0.7.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

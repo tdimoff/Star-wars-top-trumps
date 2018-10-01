@@ -1,13 +1,18 @@
-{{#hero-card
-  people=people
-  name=name
-  vehicle=vehicle
-  homeworld=homeworld
-}}{{/hero-card}}
-{{#hero-card
-  people=people
-  name=name
-  vehicle=vehicle
-  homeworld=homeworld
-}}{{/hero-card}}
+<div class="container">
+  {{#hero-card
+    people=people
+    name=name
+    vehicle=vehicle
+    homeworld=homeworld
+  }}{{/hero-card}}
+
+    <span>VS</span>
+
+  {{#hero-card
+    people=people
+    name=name
+    vehicle=vehicle
+    homeworld=homeworld
+  }}{{/hero-card}}
+</div>
 <button class='waves-effect waves-light btn' onclick={{action 'play'}}>PLAY</button>

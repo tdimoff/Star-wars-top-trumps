@@ -6,7 +6,7 @@ export default Controller.extend({
 
   actions: {
     play() {
-      const player = Math.random(this.get('people').length, 1);
+      const player = Math.floor(Math.random(this.get('people').length, 1) * 10);
     }
   }
 });
