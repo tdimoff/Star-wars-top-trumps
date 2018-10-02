@@ -10,12 +10,14 @@
   }
 
   .card {
-    max-width: 14.5rem;
+    max-width: 18.5rem;
 
     .card-image {
-      max-width: 12.5rem;
-      margin: 0 auto;
       padding: 0.6rem;
+
+      .card-title {
+        color: #000;
+      }
     }
   }
 }

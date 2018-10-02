@@ -1,45 +1,30 @@
 import DS from 'ember-data';
-import { underscore } from '@ember/string';
 import { isArray } from '@ember/array';
+import { singularize } from 'ember-inflector';
 
-export default DS.JSONAPISerializer.extend({
+export default DS.JSONSerializer.extend({
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-    const transformedPayload = { data: [] };
-
-    payload.results.forEach((obj) => {
-      const relationships = {};
-      const id = parseInt(obj.url.match(/\d+/));
-
-      for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-          if (isArray(obj[prop])) {
-            relationships[prop] = {data: []};
-            obj[prop].forEach((rel) => {
-              relationships[prop].data.push({
-                id: parseInt(rel.match(/\d+/)),
-                type: prop
-              });
-            });
-
-            delete obj[prop]
-          }
-        }
-      }
-
-      const jsonApi = {
-        id: id,
-        type: primaryModelClass.modelName,
-        attributes: obj,
-        relationships: relationships
-      };
-
-      transformedPayload.data.push(jsonApi)
-    });
-
-    return this._super(store, primaryModelClass, transformedPayload, id, requestType);
+    return this._super(store, primaryModelClass, payload.results || payload, id, requestType)
   },
 
-  keyForAttribute(attr) {
-    return underscore(attr);
+  getId(url){
+    return url.match(/\d+/)[0]
+  },
+
+  extractId(modelClass, resourceHash) {
+    for (let prop in resourceHash) {
+      if (isArray(resourceHash[prop])) {
+       resourceHash[prop].forEach((film) => {
+          resourceHash[prop].push({
+            type: singularize(prop),
+            id: film.match(/\d+/)[0]
+          });
+        });
+
+       resourceHash[prop].splice(0, resourceHash[prop].length / 2);
+      }
+    }
+
+    return this.getId(resourceHash.url);
   }
 });

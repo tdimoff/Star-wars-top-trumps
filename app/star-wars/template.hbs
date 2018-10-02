@@ -1,18 +1,13 @@
 <div class="container">
-  {{#hero-card
-    people=people
-    name=name
-    vehicle=vehicle
-    homeworld=homeworld
-  }}{{/hero-card}}
-
-    <span>VS</span>
-
-  {{#hero-card
-    people=people
-    name=name
-    vehicle=vehicle
-    homeworld=homeworld
-  }}{{/hero-card}}
+  <select class="" name="" id="">
+    <option value="1" onclick="">People</option>
+    <option value="2" onclick="">Starships</option>
+  </select>
+  {{#each players as |player|}}
+    {{#hero-card
+      player=player
+      peopleMatch=peopleMatch
+    }}{{/hero-card}}
+  {{/each}}
 </div>
-<button class='waves-effect waves-light btn' onclick={{action 'play'}}>PLAY</button>
+<button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH!</button>
