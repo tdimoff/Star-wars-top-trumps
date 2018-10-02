@@ -38,9 +38,10 @@ export default Controller.extend({
       this.set('players', [playerOne, playerTwo]);
 
       if (playerOne.mass && playerTwo.mass) {
-        playerOne.score +=1;
+        debugger;
+        playerOne.set('score', playerOne.score +=1);
       } else {
-        playerTwo.score +=1;
+        playerTwo.set('score', playerTwo.score +=1);
       }
     },
 
