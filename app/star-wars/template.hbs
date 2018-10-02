@@ -1,22 +1,22 @@
-<div class="center">
-  <div class="row">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">People</option>
-      <option value="2">Starships</option>
-    </select>
+<div class="row">
+  <div class="col offset-m4"></div>
+  <div class="col m4">
     <label>Select resource</label>
+    <select class="browser-default">
+      <option value="" disabled selected>Choose your option</option>
+      <option onclick={{action 'setResource'}} value="1">People</option>
+      <option onclick={{action 'setResource'}} value="2">Starships</option>
+    </select>
   </div>
 </div>
 <div class="container">
   {{#each players as |player|}}
     {{#hero-card
-      winsNum=winsNum
       player=player
       peopleMatch=peopleMatch
     }}{{/hero-card}}
   {{/each}}
 </div>
 <div class='center'>
-  <button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH!</button>
+  <button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH AGAIN!</button>
 </div>

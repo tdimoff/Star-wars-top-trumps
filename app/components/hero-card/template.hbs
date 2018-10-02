@@ -1,11 +1,10 @@
-<div class="counter">{{player.winsNum}}</div>
+<div class="counter">{{player.score}}</div>
 <div class="row">
   <div class="col s12">
     <div class="card">
-      {{#if false}}
-      {{else}}
-      {{/if}}
-      <span class="card-title">{{player.name}}</span>
+      <span class="card-title">
+        {{player.name}}
+      </span>
       <div class="card-image">
         {{#if peopleMatch}}
           <img src="./assets/images/greedo.jpg">
@@ -16,11 +15,14 @@
       <div class="card-content">
         {{#if peopleMatch}}
           <p>
-            {{player.name}} is a {{player.homeworld.name}}an native.
+            {{player.name}} is a {{player.homeworld.name}}an native of
+            {{#each player.species as |species|}}
+              {{species.name}}
+            {{/each}} heritage.
             He's starred in numerous movies, amongst which:
             {{#each player.films as |film|}}
               "{{film.title}}",
-            {{/each}} besides, he likes rides from
+            {{/each}} plus, he likes rides from
             {{#each player.vehicles as |vehicle|}}
               "{{vehicle.manufacturer}}",
             {{/each}}
@@ -38,18 +40,20 @@
             </tbody>
           </table>
         {{else}}
+          {{debugger}}
+
           <p>
-            {{starship.name}}
+            "{{player.name}}" is a {{player.model}}, capable of cruising at the staggering {{player.MGLT}} megalights/h.
           </p>
           <table>
             <tbody>
             <tr>
-              <td>Strength</td>
-              <td>{{player.mass}}</td>
+              <td>Crew</td>
+              <td>{{player.crew}}</td>
             </tr>
             <tr>
-              <td>Height</td>
-              <td>{{player.height}}</td>
+              <td>Cargo capacity</td>
+              <td>{{player.cargoCapacity}}</td>
             </tr>
             </tbody>
           </table>
