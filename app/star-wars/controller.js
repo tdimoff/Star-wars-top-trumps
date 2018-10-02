@@ -1,11 +1,19 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-import { A } from '@ember/array';
 
 export default Controller.extend({
+  init() {
+    this.set('score', [
+      { playerOne: 0 },
+      { playerTwo: 0}
+    ]);
+  },
+
   peopleMatch: true,
 
   people: null,
+
+  score: null,
 
   _generateRandomId(people) {
     return Math.floor(Math.random(1, people.length) * 10);
@@ -20,23 +28,24 @@ export default Controller.extend({
     ]
   }),
 
-  // playerOne: computed('people', function () {
-  //   this.get('players').push(this.people.get('firstObject'));
-  // }),
-  //
-  // playerTwo: computed('people', function () {
-  //   this.get('players').push(this.people.get('lastObject'));
-  // }),
-
-  // _generateRandom() {
-  //   return Math.random(this.get('people').length, 1) * 10;
-  // },
-
   actions: {
 
     play() {
-      // this.playerOne = this.store('peekRecord', this._generateRandom());
-      // this.playerTwo = this.store('peekRecord', this._generateRandom());
+      const people = this.get('people');
+      const playerOne = people.objectAt(this._generateRandomId(people));
+      const playerTwo = people.objectAt(this._generateRandomId(people));
+
+      this.set('players', [playerOne, playerTwo]);
+
+      if (playerOne.mass > playerTwo.mass) {
+        this.set('')
+      }
+    },
+
+    setResource(value) {
+      if (value === 'starships') {
+        this.set('peopleMatch', false);
+      }
     }
   }
 });

@@ -10,7 +10,7 @@ export default DS.Model.extend({
   hair_colors: attr('string'),
   eye_colors: attr('string'),
   average_lifespan: attr('number'),
-  planet: belongsTo('planet'),
+  homeworld: belongsTo('planet'),
   language: attr('string'),
   people: hasMany('person'),
   films: hasMany('film'),

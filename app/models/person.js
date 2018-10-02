@@ -12,7 +12,7 @@ export default DS.Model.extend({
   gender: attr('string'),
   homeworld: belongsTo('planet'),
   films: hasMany('film'),
-  species: hasMany('species'),
+  species: belongsTo('species'),
   vehicles: hasMany('vehicle'),
   starships: hasMany('starship'),
   created: attr('date'),
