@@ -1,19 +1,36 @@
 import Route from '@ember/routing/route';
-import GetAll from '../mixins/get-all';
 import RSVP from 'rsvp';
 
-export default Route.extend(GetAll, {
+export default Route.extend({
+  type: 'person',
+  randomPage: 1,
+
   model() {
     return RSVP.hash({
-      people: this.getAll(this.store, 'person', {}),
-      starships: this.getAll(this.store, 'starship', {})
-    })
+      resource: this.store.query(this.get('type'), {
+        page: this.get('randomPage')
+      })
+    });
   },
 
   setupController(controller, model) {
     controller.setProperties({
-      people: model.people,
-      starships: model.starships
-    })
+      resource: model.resource,
+      count: model.resource.get('firstObject.count'),
+      isLoading: false,
+      peopleMatch: this.get('type') === 'person'
+    });
+  },
+
+  actions: {
+    setRandomPage(randomPage) {
+      this.set('randomPage', randomPage);
+      this.refresh();
+    },
+
+    setType(type) {
+      this.set('type', type);
+      this.refresh();
+    }
   }
 });

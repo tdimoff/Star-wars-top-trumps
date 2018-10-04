@@ -15,9 +15,10 @@ export default DS.Model.extend({
   hyperdrive_rating: attr('number'),
   MGLT: attr('number'),
   starship_class: attr('string'),
-  pilots: hasMany('pilot'),
+  pilots: hasMany('person'),
   films: hasMany('film'),
   created: attr('date'),
   edited: attr('date'),
-  url: attr('string')
+  url: attr('string'),
+  count: attr('number')
 });

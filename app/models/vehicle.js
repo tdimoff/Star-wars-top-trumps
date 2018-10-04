@@ -13,7 +13,6 @@ export default DS.Model.extend({
   cargo_capacity: attr('number'),
   consumables: attr('string'),
   vehicle_class: attr('string'),
-  pilots: hasMany('pilot'),
   films: hasMany('film'),
   created: attr('date'),
   edited: attr('date'),

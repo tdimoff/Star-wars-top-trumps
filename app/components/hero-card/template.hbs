@@ -1,7 +1,6 @@
-<div class="counter">{{player.score}}</div>
-<div class="row">
+<div class="row hero-card-wrapper">
   <div class="col s12">
-    <div class="card">
+    <div class="card center-align">
       <span class="card-title">
         {{player.name}}
       </span>
@@ -13,49 +12,7 @@
         {{/if}}
       </div>
       <div class="card-content">
-        {{#if peopleMatch}}
-          <p>
-            {{player.name}} is a {{player.homeworld.name}}an native of
-            {{#each player.species as |species|}}
-              {{species.name}}
-            {{/each}} heritage.
-            He's starred in numerous movies, amongst which:
-            {{#each player.films as |film|}}
-              "{{film.title}}",
-            {{/each}} plus, he likes rides from
-            {{#each player.vehicles as |vehicle|}}
-              "{{vehicle.manufacturer}}",
-            {{/each}}
-          </p>
-          <table>
-            <tbody>
-            <tr>
-              <td>Mass</td>
-              <td>{{player.mass}}</td>
-            </tr>
-            <tr>
-              <td>Height</td>
-              <td>{{player.height}}</td>
-            </tr>
-            </tbody>
-          </table>
-        {{else}}
-          <p>
-            "{{player.name}}" is a {{player.model}}, capable of cruising at the staggering {{player.MGLT}} megalights/h.
-          </p>
-          <table>
-            <tbody>
-            <tr>
-              <td>Crew</td>
-              <td>{{player.crew}}</td>
-            </tr>
-            <tr>
-              <td>Cargo capacity</td>
-              <td>{{player.cargoCapacity}}</td>
-            </tr>
-            </tbody>
-          </table>
-        {{/if}}
+        {{yield}}
       </div>
     </div>
   </div>

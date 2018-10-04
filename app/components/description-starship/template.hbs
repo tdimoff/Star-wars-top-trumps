@@ -1,0 +1,23 @@
+<p>
+  "{{player.name}}" is a {{player.model}}
+  {{#if player.MGLT}}
+    It is capable of cruising at the staggering {{player.MGLT}} megalights/h.
+  {{/if}} and is featuring a.
+  {{#if player.pilots}}
+    {{#each player.pilots as |pilot|}}
+      It is currently being operated by {{pilot.name}}, it's solid.
+    {{/each}}
+  {{/if}}
+</p>
+<table>
+  <tbody>
+  <tr>
+    <td>Crew</td>
+    <td>{{player.crew}}</td>
+  </tr>
+  <tr>
+    <td>Cargo capacity</td>
+    <td>{{player.cargoCapacity}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -2,21 +2,42 @@
   <div class="col offset-m4"></div>
   <div class="col m4">
     <label>Select resource</label>
-    <select class="browser-default">
-      <option value="" disabled selected>Choose your option</option>
-      <option onclick={{action 'setResource'}} value="1">People</option>
-      <option onclick={{action 'setResource'}} value="2">Starships</option>
+    <select class="browser-default" onchange={{action 'setResource'}}>
+      <option default=default value="person">People</option>
+      <option value="starship">Starships</option>
     </select>
   </div>
 </div>
-<div class="container">
+<div class="row ">
+  <div class="col offset-m1"></div>
+  <h3 class="col m4 center-align">
+    {{playerOneScore}}
+  </h3>
+  <div class="col m2 center-align">
+  {{#unless isLoading}}
+      <button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH AGAIN!</button>
+  {{else}}
+    {{loading-spinner}}
+  {{/unless}}
+  </div>
+  <h3 class="col m4 center-align">
+    {{playerTwoScore}}
+  </h3>
+</div>
+<div class="row">
+  <div class="col offset-m1"></div>
   {{#each players as |player|}}
-    {{#hero-card
-      player=player
-      peopleMatch=peopleMatch
-    }}{{/hero-card}}
+    <div class="col m5">
+      {{#hero-card
+        player=player
+        peopleMatch=peopleMatch}}
+        {{#if peopleMatch}}
+          {{description-person player=player}}
+        {{else}}
+          {{description-starship player=player}}
+        {{/if}}
+      {{/hero-card}}
+    </div>
   {{/each}}
 </div>
-<div class='center'>
-  <button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH AGAIN!</button>
-</div>
+

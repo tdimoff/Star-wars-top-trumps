@@ -17,5 +17,6 @@ export default DS.Model.extend({
   starships: hasMany('starship'),
   created: attr('date'),
   edited: attr('date'),
-  url: attr('string')
+  url: attr('string'),
+  count: attr('number')
 });

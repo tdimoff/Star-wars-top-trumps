@@ -2,52 +2,68 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
-  peopleMatch: false,
+  resource: null,
 
-  people: null,
+  count: null,
 
-  starships: null,
+  winning: null,
 
-  _generateRandomId(people) {
-    return Math.floor(Math.random(1, people.length) * 10);
+  playerOneScore: 0,
+
+  playerTwoScore: 0,
+
+  peopleMatch: null,
+
+  commonProperty: computed('peopleMatch', function () {
+    return this.get('peopleMatch') ? 'mass' : 'crew'
+  }),
+
+  _generateRandomIndex() {
+    let recordsPerPage = 0;
+    recordsPerPage = +this.get('count') % 10;
+
+    return Math.floor(Math.random() * (recordsPerPage - 1) + 1);
   },
 
-  players: computed('people', 'starships', function() {
-    const resource = this.get('peopleMatch') ? this.get('people') : this.get('starships');
+  _generateRandomPage(recordCount) {
+    this.set('randomPage', Math.floor(Math.random() * recordCount + 1));
+  },
+
+  players: computed('resource', function() {
+    const resource = this.get('resource');
+    const firstPlayerIndex = this._generateRandomIndex();
+    const secondPlayerIndex = this._generateRandomIndex();
+    const firstPlayer = resource.objectAt(firstPlayerIndex);
+    const secondPlayer = resource.objectAt(secondPlayerIndex);
+
+
+    if (firstPlayerIndex === secondPlayerIndex) {
+      secondPlayer.id = this.incrementProperty(secondPlayer.get('id'));
+    }
+
+    if (firstPlayer.get(this.get('commonProperty')) > secondPlayer.get(this.get('commonProperty'))) {
+      this.incrementProperty('playerOneScore')
+    } else if (firstPlayer.get(this.get('commonProperty')) === secondPlayer.get(this.get('commonProperty'))) {
+      // TODO handle equal
+    } else {
+      this.incrementProperty('playerTwoScore');
+    }
 
     return [
-      resource.objectAt(this._generateRandomId(resource)),
-      resource.objectAt(this._generateRandomId(resource))
+      firstPlayer,
+      secondPlayer
     ]
   }),
 
   actions: {
-
     play() {
-      const resource = this.get('peopleMatch') ? this.get('people') : this.get('starships');
-
-      const playerOne = resource.objectAt(this._generateRandomId(resource));
-      let playerTwo = resource.objectAt(this._generateRandomId(resource));
-
-      //if playerOne's id is the last in the store
-      // if (&& people.objectAt(playerOne.get('id')) + 1)
-      if (playerOne.get('id') === playerTwo.get('id')) {
-        playerTwo = resource.objectAt(playerOne.get('id') + 1);
-      }
-
-      this.set('players', [playerOne, playerTwo]);
-
-      if (playerOne.mass && playerTwo.mass) {
-        playerOne.set('score', playerOne.score +=1);
-      } else {
-        playerTwo.set('score', playerTwo.score +=1);
-      }
+      this.set('isLoading', true);
+      this.send('setRandomPage', this._generateRandomPage(this.get('count')));
     },
 
-    setResource() {
-      if (event.value === 'starships') {
-        this.set('peopleMatch', false);
-      }
+    setResource(event) {
+      this.set('isLoading', true);
+      // this.send('setType', event.srcElement.value);
     }
   }
 });

@@ -1,0 +1,33 @@
+<p>
+  {{player.name}} is a {{player.homeworld.name}}an native
+  {{#if player.species}}
+    of {{player.species.name}} heritage.
+  {{/if}}
+  He's starred in numerous movies
+  {{#if player.films}}
+    , amongst which
+    {{#each player.films as |film|}}
+      "{{film.title}}",
+    {{/each}}
+  {{/if}}
+  plus,
+  {{#if player.vehicles}}
+    he likes rides from
+    {{#each player.vehicles as |vehicle|}}
+      "{{vehicle.manufacturer}}",
+    {{/each}}
+  {{/if}}
+  he's cool.
+</p>
+<table>
+  <tbody>
+  <tr>
+    <td>Mass</td>
+    <td>{{player.mass}}</td>
+  </tr>
+  <tr>
+    <td>Height</td>
+    <td>{{player.height}}</td>
+  </tr>
+  </tbody>
+</table>

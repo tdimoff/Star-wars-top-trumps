@@ -1,25 +1,11 @@
-.container {
-  display: flex;
-  justify-content: center;
-  padding: 4rem 6rem 1.5rem 6rem;
-  width: 100%;
-
-  .counter {
-    height: 1.5rem;
-    width: 1.5rem;
-    margin: 0 auto;
-  }
-
-  span {
-    margin: 1rem;
-    font-weight: bold;
-  }
+.hero-card-wrapper {
 
   .card {
-    max-width: 18.5rem;
 
     .card-image {
       padding: 0.6rem;
+      max-width: 18.5rem;
+      margin: 0 auto;
 
       .card-title {
         color: #000;
