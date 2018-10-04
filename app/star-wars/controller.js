@@ -37,23 +37,8 @@ export default Controller.extend({
 
   players: computed('resource', function() {
     const resource = this.get('resource');
-    const firstPlayerIndex = this._generateRandomIndex();
-    const secondPlayerIndex = this._generateRandomIndex();
-    const firstPlayer = resource.objectAt(firstPlayerIndex);
-    const secondPlayer = resource.objectAt(secondPlayerIndex);
-
-
-    if (firstPlayerIndex === secondPlayerIndex) {
-      secondPlayer.id = this.incrementProperty(secondPlayer.get('id'));
-    }
-
-    if (firstPlayer.get(this.get('commonProperty')) > secondPlayer.get(this.get('commonProperty'))) {
-      this.incrementProperty('playerOneScore')
-    } else if (firstPlayer.get(this.get('commonProperty')) === secondPlayer.get(this.get('commonProperty'))) {
-      // TODO handle equal
-    } else {
-      this.incrementProperty('playerTwoScore');
-    }
+    const firstPlayer = resource.objectAt(this._generateRandomIndex());
+    const secondPlayer = resource.objectAt(this._generateRandomIndex());
 
     return [
       firstPlayer,
@@ -64,6 +49,20 @@ export default Controller.extend({
   actions: {
     play() {
       const randomPage = this._generateRandomPage(this.get('count'));
+      const firstPlayer = this.get('players.firstObject');
+      const secondPlayer = this.get('players')[1];
+
+      if (firstPlayer.get('id') === secondPlayer.get('id')) {
+        secondPlayer.id = this.incrementProperty(secondPlayer.get('id'));
+      }
+
+      if (firstPlayer.get(this.get('commonProperty')) > secondPlayer.get(this.get('commonProperty'))) {
+        this.incrementProperty('playerOneScore')
+      } else if (firstPlayer.get(this.get('commonProperty')) === secondPlayer.get(this.get('commonProperty'))) {
+        // TODO handle equal
+      } else {
+        this.incrementProperty('playerTwoScore');
+      }
 
       this.set('isLoading', true);
       this.send('setRandomPage', randomPage);
