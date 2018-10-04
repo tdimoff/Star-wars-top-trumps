@@ -14,10 +14,10 @@ export default Controller.extend({
 
   playerTwoScore: 0,
 
-  peopleMatch: null,
+  vsPerson: null,
 
-  commonProperty: computed('peopleMatch', function () {
-    return this.get('peopleMatch') ? 'mass' : 'crew'
+  commonProperty: computed('vsPerson', function () {
+    return this.get('vsPerson') ? 'mass' : 'crew'
   }),
 
   _generateRandomIndex() {
@@ -50,16 +50,16 @@ export default Controller.extend({
     play() {
       const randomPage = this._generateRandomPage(this.get('count'));
       const firstPlayer = this.get('players.firstObject');
-      const secondPlayer = this.get('players')[1];
+      let secondPlayer = this.get('players')[1];
 
       if (firstPlayer.get('id') === secondPlayer.get('id')) {
-        secondPlayer.id = this.incrementProperty(secondPlayer.get('id'));
+        secondPlayer = this.get('resource').objectAt(this._generateRandomIndex());
       }
 
       if (firstPlayer.get(this.get('commonProperty')) > secondPlayer.get(this.get('commonProperty'))) {
         this.incrementProperty('playerOneScore')
       } else if (firstPlayer.get(this.get('commonProperty')) === secondPlayer.get(this.get('commonProperty'))) {
-        // TODO handle equal
+        //TODO handle when attributes are equal
       } else {
         this.incrementProperty('playerTwoScore');
       }
@@ -71,7 +71,7 @@ export default Controller.extend({
 
     setResource(event) {
       this.set('isLoading', true);
-      this.send('setType', event.srcElement.value);
+      this.send('setType', event.target.value);
     }
   }
 });

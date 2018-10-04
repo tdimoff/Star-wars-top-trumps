@@ -18,7 +18,7 @@ export default Route.extend({
       resource: model.resource,
       count: model.resource.get('firstObject.count'),
       isLoading: false,
-      peopleMatch: this.get('type') === 'person'
+      vsPerson: this.get('type') === 'person'
     });
   },
 

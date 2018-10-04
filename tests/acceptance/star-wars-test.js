@@ -8,5 +8,7 @@ module('Acceptance | star wars', function(hooks) {
   test('Switching resources displays different cards', async function(assert) {
     await visit('/star-wars');
 
+    this.$('.browser-default').val(2).change();
+    debugger;
   });
 });

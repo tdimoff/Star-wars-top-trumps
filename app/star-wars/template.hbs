@@ -30,8 +30,8 @@
     <div class="col m5">
       {{#hero-card
         player=player
-        peopleMatch=peopleMatch}}
-        {{#if peopleMatch}}
+        vsPerson=vsPerson}}
+        {{#if vsPerson}}
           {{description-person player=player}}
         {{else}}
           {{description-starship player=player}}
