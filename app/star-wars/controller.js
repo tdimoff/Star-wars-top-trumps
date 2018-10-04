@@ -71,7 +71,7 @@ export default Controller.extend({
 
     setResource(event) {
       this.set('isLoading', true);
-      // this.send('setType', event.srcElement.value);
+      this.send('setType', event.srcElement.value);
     }
   }
 });
