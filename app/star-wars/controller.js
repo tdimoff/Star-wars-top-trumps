@@ -2,6 +2,8 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
+  randomPage: null,
+
   resource: null,
 
   count: null,
@@ -19,8 +21,12 @@ export default Controller.extend({
   }),
 
   _generateRandomIndex() {
-    let recordsPerPage = 0;
-    recordsPerPage = +this.get('count') % 10;
+    let recordsPerPage = 10;
+    let totalCount = this.get('count');
+
+    if (this.get('randomPage') === Math.ceil(totalCount / 10)) {
+      recordsPerPage = totalCount % 10;
+    }
 
     return Math.floor(Math.random() * (recordsPerPage - 1) + 1);
   },
@@ -57,8 +63,11 @@ export default Controller.extend({
 
   actions: {
     play() {
+      const randomPage = this._generateRandomPage(this.get('count'));
+
       this.set('isLoading', true);
-      this.send('setRandomPage', this._generateRandomPage(this.get('count')));
+      this.send('setRandomPage', randomPage);
+      this.set('randomPage', randomPage);
     },
 
     setResource(event) {
