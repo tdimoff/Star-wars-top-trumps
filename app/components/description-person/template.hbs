@@ -1,3 +1,19 @@
+<table>
+  <tbody>
+  <tr>
+    <td>Mass</td>
+    <td>
+      <div class="{{if player.isWinner 'chip'}}">
+        {{player.mass}}
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Height</td>
+    <td>{{player.height}}</td>
+  </tr>
+  </tbody>
+</table>
 <p>
   {{player.name}} is a {{player.homeworld.name}}an native
   {{#if player.species}}
@@ -19,15 +35,3 @@
   {{/if}}
   he's cool.
 </p>
-<table>
-  <tbody>
-  <tr>
-    <td>Mass</td>
-    <td>{{player.mass}}</td>
-  </tr>
-  <tr>
-    <td>Height</td>
-    <td>{{player.height}}</td>
-  </tr>
-  </tbody>
-</table>

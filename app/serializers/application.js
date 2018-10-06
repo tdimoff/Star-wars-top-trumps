@@ -17,6 +17,10 @@ export default DS.JSONSerializer.extend({
 
   extractId(modelClass, resourceHash) {
     for (let prop in resourceHash) {
+      if (resourceHash[prop] === 'unknown') {
+        resourceHash[prop] = undefined;
+      }
+
       if (isArray(resourceHash[prop])) {
        resourceHash[prop].forEach((film) => {
           resourceHash[prop].push({

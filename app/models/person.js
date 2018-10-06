@@ -3,8 +3,8 @@ const { attr, hasMany, belongsTo } = DS;
 
 export default DS.Model.extend({
   name: attr('string'),
-  height: attr('number'),
-  mass: attr('number'),
+  height: attr('number' , { defaultValue: Math.floor(Math.random() * 50 + 150) }),
+  mass: attr('number', { defaultValue() { return Math.floor(Math.random() * 80 + 20) }}),
   hair_color: attr('string'),
   skin_color: attr('string'),
   eye_color: attr('string'),

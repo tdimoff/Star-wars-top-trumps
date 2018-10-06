@@ -12,3 +12,4 @@ export default ApplicationSerializer.extend({
     return this._super(relationshipModelName, relationshipHash);
   }
 });
+

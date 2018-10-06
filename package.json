@@ -46,7 +46,8 @@
     "loader.js": "^4.7.0",
     "materialize-css": "^1.0.0",
     "node-sass": "^4.9.3",
-    "qunit-dom": "^0.7.1"
+    "qunit-dom": "^0.7.1",
+    "sinon": "^6.3.5"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

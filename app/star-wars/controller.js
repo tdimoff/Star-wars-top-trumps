@@ -36,23 +36,27 @@ export default Controller.extend({
   actions: {
     play() {
       const resource = this.get('resource');
-      const randomPage = this._generateRandomPage(this.get('count'));
-      const firstPlayer = resource.objectAt(this._generateRandomIndex(randomPage));
-      let secondPlayer = resource.objectAt(this._generateRandomIndex(randomPage));
+      const firstPlayer = resource.objectAt(this._generateRandomIndex(this.get('randomPage')));
+      let secondPlayer = resource.objectAt(this._generateRandomIndex(this.get('randomPage')));
 
       if (firstPlayer.get('id') === secondPlayer.get('id')) {
-        secondPlayer = this.get('resource').objectAt(this._generateRandomIndex());
+        secondPlayer = this.get('resource').objectAt(this._generateRandomIndex(this.get('randomPage')));
       }
 
+      firstPlayer.set('isWinner', false);
+      secondPlayer.set('isWinner', false);
+
       if (firstPlayer.get(this.get('commonProperty')) > secondPlayer.get(this.get('commonProperty'))) {
+        firstPlayer.set('isWinner', true);
         this.incrementProperty('playerOneScore')
       } else if (firstPlayer.get(this.get('commonProperty')) < secondPlayer.get(this.get('commonProperty'))) {
+        secondPlayer.set('isWinner', true);
         this.incrementProperty('playerTwoScore');
       }
 
       this.set('players', [firstPlayer, secondPlayer]);
       this.set('disabled', true);
-      this.send('setRandomPage', randomPage);
+      this.send('setRandomPage', this._generateRandomPage(this.get('count')));
     },
 
     setResource(event) {
