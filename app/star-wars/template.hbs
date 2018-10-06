@@ -14,11 +14,7 @@
     {{playerOneScore}}
   </h3>
   <div class="col m2 center-align">
-  {{#unless isLoading}}
-      <button class='waves-effect waves-light btn' onclick={{action 'play'}}>MATCH AGAIN!</button>
-  {{else}}
-    {{loading-spinner}}
-  {{/unless}}
+    <button class='waves-effect waves-light btn' disabled={{disabled}} onclick={{action 'play'}}>MATCH AGAIN!</button>
   </div>
   <h3 class="col m4 center-align">
     {{playerTwoScore}}

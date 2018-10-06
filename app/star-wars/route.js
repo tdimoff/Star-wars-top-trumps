@@ -17,7 +17,7 @@ export default Route.extend({
     controller.setProperties({
       resource: model.resource,
       count: model.resource.get('firstObject.count'),
-      isLoading: false,
+      disabled: false,
       vsPerson: this.get('type') === 'person'
     });
   },
@@ -30,6 +30,7 @@ export default Route.extend({
 
     setType(type) {
       this.set('type', type);
+      this.set('randomPage', 1);
       this.refresh();
     }
   }
