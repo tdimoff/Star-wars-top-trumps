@@ -6,21 +6,28 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | description-starship', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('Starship component displays player attributes correctly', async function(assert) {
+    const description = `"Yamato" is a Battlecruiser It is capable of cruising at the staggering 40 megalights/h and is able to carry 1800000 metric tons of cargo. It is currently being operated by Jabba the Hut, Greedo, it's solid.`;
 
-    await render(hbs`{{description-starship}}`);
+    this.setProperties({
+      player: {
+        name: 'Yamato',
+        model: 'Battlecruiser',
+        crew: 100000,
+        cargo_capacity: 1800000,
+        MGLT: 40,
+        pilots: [
+          {
+            name: 'Jabba the Hut'
+          },
+          {
+            name: 'Greedo'
+          }]
+      }
+    });
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`{{description-starship player=player}}`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#description-starship}}
-        template block text
-      {{/description-starship}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.querySelector('p').innerText.trim(), description, 'Description is not displayed correctly');
   });
 });

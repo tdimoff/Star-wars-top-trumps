@@ -17,11 +17,16 @@
 <p>
   "{{player.name}}" is a {{player.model}}
   {{#if player.MGLT}}
-    It is capable of cruising at the staggering {{player.MGLT}} megalights/h.
-  {{/if}} and is featuring a.
+    It is capable of cruising at the staggering {{player.MGLT}} megalights/h
+  {{/if}}
+  {{#if player.cargo_capacity}}
+    and is able to carry {{player.cargo_capacity}} metric tons of cargo.
+  {{/if}}
   {{#if player.pilots}}
+    It is currently being operated by
     {{#each player.pilots as |pilot|}}
-      It is currently being operated by {{pilot.name}}, it's solid.
+      {{pilot.name}},
     {{/each}}
+    it's solid.
   {{/if}}
 </p>
