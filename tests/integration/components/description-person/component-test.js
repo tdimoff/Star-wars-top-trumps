@@ -6,21 +6,32 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | description-person', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('Component displays player attributes correctly', async function(assert) {
+    const description = `Mass\n\n            100\n\n\n\n     Height\n\n\n\n
+    180\nLuke Skywalker is a an native\nof  heritage.\n   He's starred in numerous movies\n      , amongst which\n     "Midnight in Paris",
+  plus,\n     he likes rides from\n      "Mercedes-Benz",\n      "Lincoln",\n  he's cool.`;
 
-    await render(hbs`{{description-person}}`);
+    this.setProperties({
+      player: {
+        mass: 100,
+        height: 180,
+        homeworld: 'Tatooine',
+        name: 'Luke Skywalker',
+        species: [{ name: 'human' }],
+        films: [{ title: 'Midnight in Paris' }],
+        vehicles: [
+          {
+            name: 'S600',
+            manufacturer: 'Mercedes-Benz' },
+          {
+            manufacturer: 'Lincoln',
+            name: 'Continental Mark VII'
+          }]
+      }
+    });
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`{{description-person player=player}}`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#description-person}}
-        template block text
-      {{/description-person}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.querySelector('p').textContent.trim(), description, 'Description is not displayed correctly');
   });
 });

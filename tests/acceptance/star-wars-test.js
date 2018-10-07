@@ -1,6 +1,8 @@
 import { module, test } from 'qunit';
 import { visit, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+import { click,fillin } from '@ember/test-helpers';
+import $ from 'jquery';
 
 module('Acceptance | star wars', function(hooks) {
   setupApplicationTest(hooks);
@@ -8,7 +10,8 @@ module('Acceptance | star wars', function(hooks) {
   test('Switching resources displays different cards', async function(assert) {
     await visit('/star-wars');
 
-    this.$('.browser-default').val(2).change();
+    await fillin('select', '2');
+    $('select').trigger('change');
     debugger;
   });
 });

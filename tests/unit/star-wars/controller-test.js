@@ -1,6 +1,6 @@
-import { module } from 'qunit';
+import { module,test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import test from 'ember-sinon-qunit';
+import sinon from 'sinon';
 
 module('Unit | Controller | star-wars', function(hooks) {
   setupTest(hooks);
@@ -8,7 +8,7 @@ module('Unit | Controller | star-wars', function(hooks) {
   test('Check if it generates a smaller index if on the last page', function(assert) {
     const controller = this.owner.lookup('controller:star-wars');
     const floorSpy = sinon.spy(Math, 'floor');
-    const randomStub = sinon.stub(Math, 'random').returns(5);
+    const randomStub = sinon.stub(Math, 'random').returns(0.5);
 debugger;
     controller.setProperties({
       'count': 87,
@@ -16,6 +16,6 @@ debugger;
     });
     const generateRandomIndexValue = controller._generateRandomIndex();
 
-    assert.ok(floorSpy.calledWith(), 'Random index not generated correctly');
+    assert.ok(floorSpy.calledWith(''), 'Random index not generated correctly');
   });
 });
