@@ -2,8 +2,8 @@
   <div class="col offset-m4"></div>
   <div class="col m4">
     <label>Select resource</label>
-    <select class="browser-default" onchange={{action 'setResource'}}>
-      <option default=default value="person">People</option>
+    <select class="browser-default" onchange={{action "setResource"}}>
+      <option value="person">People</option>
       <option value="starship">Starships</option>
     </select>
   </div>
@@ -14,7 +14,13 @@
     {{playerOneScore}}
   </h3>
   <div class="col m2 center-align">
-    <button class='waves-effect waves-light btn' disabled={{disabled}} onclick={{action 'play'}}>MATCH AGAIN!</button>
+    <button
+      class="waves-effect waves-light btn"
+      disabled={{disabled}}
+      onclick={{action "play"}}
+    >
+      MATCH AGAIN!
+    </button>
   </div>
   <h3 class="col m4 center-align">
     {{playerTwoScore}}
@@ -26,7 +32,8 @@
     <div class="col m5">
       {{#hero-card
         player=player
-        vsPerson=vsPerson}}
+        vsPerson=vsPerson
+      }}
         {{#if vsPerson}}
           {{description-person player=player}}
         {{else}}

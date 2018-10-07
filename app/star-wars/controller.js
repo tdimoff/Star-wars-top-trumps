@@ -30,7 +30,7 @@ export default Controller.extend({
   },
 
   _generateRandomPage(recordCount) {
-    return Math.ceil(Math.random() * recordCount / 10);
+    return Math.ceil(Math.  random() * recordCount / 10);
   },
 
   actions: {
@@ -39,6 +39,7 @@ export default Controller.extend({
       const firstPlayer = resource.objectAt(this._generateRandomIndex(this.get('randomPage')));
       let secondPlayer = resource.objectAt(this._generateRandomIndex(this.get('randomPage')));
 
+      //Prevent players from getting matched against themselves
       if (firstPlayer.get('id') === secondPlayer.get('id')) {
         secondPlayer = this.get('resource').objectAt(this._generateRandomIndex(this.get('randomPage')));
       }

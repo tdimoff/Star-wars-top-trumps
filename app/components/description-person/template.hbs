@@ -1,17 +1,15 @@
 <table>
   <tbody>
-  <tr>
-    <td>Mass</td>
-    <td>
-      <div class="{{if player.isWinner 'chip'}}">
+    <tr>
+      <td>Mass</td>
+      <td class="mass {{if player.isWinner "chip"}}">
         {{player.mass}}
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>Height</td>
-    <td>{{player.height}}</td>
-  </tr>
+      </td>
+    </tr>
+    <tr>
+      <td class="height">Height</td>
+      <td>{{player.height}}</td>
+    </tr>
   </tbody>
 </table>
 <p>
