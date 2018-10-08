@@ -98,7 +98,7 @@ module('Unit | Controller | star-wars', function(hooks) {
     });
     controller.actions.play.call(controller);
 
-    assert.equal(controller.playerTwoScore, 1, 'Winner\s score isn\'t incremented');
+    assert.equal(controller.playerTwoScore, 1, 'Winner\'s score isn\'t incremented');
     assert.ok(controller.players.lastObject.isWinner, 'Incorrect side marked as a winner');
   });
 
