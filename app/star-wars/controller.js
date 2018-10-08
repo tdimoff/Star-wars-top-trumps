@@ -30,7 +30,7 @@ export default Controller.extend({
   },
 
   _generateRandomPage(recordCount) {
-    return Math.ceil(Math.  random() * recordCount / 10);
+    return Math.ceil(Math.random() * recordCount / 10);
   },
 
   actions: {
