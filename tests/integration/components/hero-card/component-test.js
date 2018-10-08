@@ -41,7 +41,6 @@ module('Integration | Component | hero-card', function(hooks) {
       {{/hero-card}}
     `);
 
-    assert.equal($(''))
     assert.equal($('.card-title').text().trim(), 'Yamato', 'Incorrect card title');
     assert.equal(this.element.querySelector('p').innerText.trim(), description, 'Incorrectly yielded sub-component');
   });
